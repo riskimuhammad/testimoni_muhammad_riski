@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:muhammad_riski_testimoni/core/helper/navigator_helper.dart';
+import 'package:muhammad_riski_testimoni/feature/dashboard/presentation/controlller/home_controller.dart';
+import 'package:muhammad_riski_testimoni/feature/dashboard/presentation/page/main_home_page.dart';
 
 main() {
   runApp(TestimoniApp());
@@ -8,7 +11,10 @@ main() {
 
 class InitialBinding implements Bindings {
   @override
-  void dependencies() {}
+  void dependencies() {
+    Get.lazyPut<HomeController>(() => HomeController(),
+        fenix: true, tag: 'HOME-CONTROLLER');
+  }
 }
 
 class TestimoniApp extends StatefulWidget {
@@ -38,6 +44,12 @@ class _TestimoniAppState extends State<TestimoniApp> {
       localizationsDelegates: AppLocalizations.localizationsDelegates,
       supportedLocales: AppLocalizations.supportedLocales,
       locale: _locale,
+      initialRoute: routeName.root,
+      getPages: [
+        GetPage(name: routeName.home, page: () => MainHomePage()),
+        GetPage(name: routeName.search, page: () => MainHomePage()),
+      ],
+      home: MainHomePage(),
     );
   }
 }
