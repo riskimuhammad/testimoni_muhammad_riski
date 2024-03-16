@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -12,8 +14,7 @@ main() {
 class InitialBinding implements Bindings {
   @override
   void dependencies() {
-    Get.lazyPut<HomeController>(() => HomeController(),
-        fenix: true, tag: 'HOME-CONTROLLER');
+    Get.lazyPut<HomeController>(() => HomeController(), fenix: true);
   }
 }
 
@@ -46,10 +47,9 @@ class _TestimoniAppState extends State<TestimoniApp> {
       locale: _locale,
       initialRoute: routeName.root,
       getPages: [
-        GetPage(name: routeName.home, page: () => MainHomePage()),
+        GetPage(name: routeName.root, page: () => MainHomePage()),
         GetPage(name: routeName.search, page: () => MainHomePage()),
       ],
-      home: MainHomePage(),
     );
   }
 }
