@@ -9,44 +9,33 @@ import '../controller/search_controller.dart';
 class ListTetstimonial {
   list(context) {
     final _controller = Get.find<SrcController>();
-    return Expanded(
+    return SizedBox(
+      width: MediaQuery.of(context).size.width,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          if (_controller.searchtestimonialIsLoading.value)
-            Expanded(
-              child: Container(
-                  padding: EdgeInsets.all(10),
-                  height: 50,
-                  width: 60,
-                  alignment: Alignment.center,
-                  child: CircularProgressIndicator()),
-            ),
-          if (_controller.searchController.value.text.isNotEmpty &&
-              !_controller.searchtestimonialIsLoading.value)
+          if (_controller.searchController.value.text.isNotEmpty)
             GestureDetector(
               onTap: () => _controller.searchDataTestimonials(isName: true),
-              child: Expanded(
-                child: Container(
-                  alignment: Alignment.topLeft,
-                  padding: const EdgeInsets.only(top: 30, left: 16, right: 16),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Icon(Icons.search),
-                      Expanded(
-                        child: Text(
-                          !_controller.searchByName.value
-                              ? AppLocalizations.of(context)!.notFound
-                              : AppLocalizations.of(context)!.searchByName +
-                                  " \"${_controller.searchController.value.text}\"",
-                          maxLines: 1,
-                          overflow: TextOverflow.ellipsis,
-                          style: materialTextStyle.textStyleFZ15Blue,
-                        ),
+              child: Container(
+                alignment: Alignment.topLeft,
+                padding: const EdgeInsets.only(top: 30, left: 16, right: 16),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Icon(Icons.search),
+                    Expanded(
+                      child: Text(
+                        !_controller.searchByName.value
+                            ? AppLocalizations.of(context)!.notFound
+                            : AppLocalizations.of(context)!.searchByName +
+                                " \"${_controller.searchController.value.text}\"",
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                        style: materialTextStyle.textStyleFZ15Blue,
                       ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
               ),
             ),

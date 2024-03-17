@@ -20,7 +20,7 @@ class MainSearchPage extends StatelessWidget {
         child: Column(
           children: [
             _searchField.search(context),
-            Obx(() => _listTestimonial.list(context)),
+            Obx(() => Expanded(child: _listTestimonial.list(context))),
           ],
         ),
       )),

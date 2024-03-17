@@ -20,7 +20,6 @@ class SrcController extends GetxController {
       TextEditingController(text: '').obs;
   Rx<bool> testimonialIsEmpty = false.obs;
   Rx<bool> testimonialIsLoading = false.obs;
-  Rx<bool> searchtestimonialIsLoading = false.obs;
   Rx<bool> searchByName = true.obs;
   Rx<bool> searchTestimonialIsEmpty = false.obs;
   Rx<int> currentPage = 1.obs;
@@ -35,7 +34,6 @@ class SrcController extends GetxController {
     if (params.search!.isNotEmpty || params.name!.isNotEmpty) {
       listTestimonials.clear();
       searchTestimonialIsEmpty.value = false;
-      searchtestimonialIsLoading.value = true;
       final either = await getTestimonial(params);
       either.fold((l) {
         final responseDecode = json.decode(l.body);
@@ -45,14 +43,10 @@ class SrcController extends GetxController {
         }
         if (listTestimonials.isEmpty) {
           searchTestimonialIsEmpty.value = true;
-          searchtestimonialIsLoading.value = false;
-        } else {
-          searchtestimonialIsLoading.value = false;
         }
       }, (r) {
         searchTestimonialIsEmpty.value = true;
         searchByName.value = false;
-        searchtestimonialIsLoading.value = false;
       });
     }
     listTestimonials.value = listTestimonialsTmp;
