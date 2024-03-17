@@ -1,7 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:http/http.dart' as http;
 import '../../../../core/error/failure.dart';
-import '../model/Testimonial_model.dart';
+import '../model/testimonial_model.dart';
 
 abstract class SearchRepository {
   Future<Either<http.Response, Failure>> getTestimonial(

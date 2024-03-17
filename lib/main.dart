@@ -4,6 +4,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:muhammad_riski_testimoni/core/helper/navigator_helper.dart';
 import 'package:muhammad_riski_testimoni/feature/dashboard/presentation/controlller/home_controller.dart';
 import 'package:muhammad_riski_testimoni/feature/dashboard/presentation/page/main_home_page.dart';
+import 'package:muhammad_riski_testimoni/feature/search/presentation/controller/search_controller.dart';
 import 'package:muhammad_riski_testimoni/feature/search/presentation/page/main_search_page.dart';
 
 main() {
@@ -14,6 +15,7 @@ class InitialBinding implements Bindings {
   @override
   void dependencies() {
     Get.lazyPut<HomeController>(() => HomeController(), fenix: true);
+    Get.lazyPut<SrcController>(() => SrcController(), fenix: true);
   }
 }
 

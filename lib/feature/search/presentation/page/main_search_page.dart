@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:get/get.dart';
 import 'package:muhammad_riski_testimoni/feature/search/presentation/widget/list_tetstimonial.dart';
+
+import '../widget/search_field.dart';
 
 class MainSearchPage extends StatelessWidget {
   const MainSearchPage({super.key});
@@ -9,6 +10,7 @@ class MainSearchPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final _listTestimonial = ListTetstimonial();
+    final _searchField = SearchField();
     return Hero(
       tag: 'SEARCH',
       child: Material(
@@ -17,15 +19,7 @@ class MainSearchPage extends StatelessWidget {
         width: MediaQuery.of(context).size.width,
         child: Column(
           children: [
-            Padding(
-              padding: const EdgeInsets.only(left: 16, right: 16, top: 30),
-              child: TextFormField(
-                decoration: InputDecoration(
-                  hintText: AppLocalizations.of(context)!.hintSearch,
-                  prefixIcon: Icon(Icons.search),
-                ),
-              ),
-            ),
+            _searchField.search(context),
             Obx(() => _listTestimonial.list(context)),
           ],
         ),

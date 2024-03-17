@@ -2,5 +2,7 @@
     "allDataIsGenerated":"All data have been loaded" ,
     "more":"More",
     "createAt":"Create At",
-    "hintSearch": "Want to find something?"
+    "hintSearch": "Want to find something?",
+    "searchByName": "Search by name ?",
+    "notFound": "Not Found !"
 }

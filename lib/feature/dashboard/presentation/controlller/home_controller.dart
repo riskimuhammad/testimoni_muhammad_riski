@@ -7,7 +7,7 @@ import 'package:muhammad_riski_testimoni/core/helper/dialog_helper.dart';
 import 'package:muhammad_riski_testimoni/core/helper/languages_key.dart';
 import 'package:muhammad_riski_testimoni/core/helper/session_helper.dart';
 import 'package:muhammad_riski_testimoni/feature/dashboard/data/datasources/home_datasources.dart';
-import 'package:muhammad_riski_testimoni/feature/dashboard/data/model/Testimonial_model.dart';
+import 'package:muhammad_riski_testimoni/feature/dashboard/data/model/testimonial_model.dart';
 import 'package:muhammad_riski_testimoni/feature/dashboard/domain/entity/testimonial_enitity.dart';
 import 'package:muhammad_riski_testimoni/feature/dashboard/domain/repository/home_repository_impl.dart';
 import 'package:muhammad_riski_testimoni/main.dart';

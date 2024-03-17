@@ -1,17 +1,55 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:muhammad_riski_testimoni/core/helper/date_formater.dart';
 import 'package:muhammad_riski_testimoni/core/material/material_color.dart';
 import 'package:muhammad_riski_testimoni/core/material/material_text_style.dart';
-import 'package:muhammad_riski_testimoni/feature/dashboard/presentation/controlller/home_controller.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
+import '../controller/search_controller.dart';
 
 class ListTetstimonial {
   list(context) {
-    final _controller = Get.find<HomeController>();
+    final _controller = Get.find<SrcController>();
     return Expanded(
       child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
+          if (_controller.searchtestimonialIsLoading.value)
+            Expanded(
+              child: Container(
+                  padding: EdgeInsets.all(10),
+                  height: 50,
+                  width: 60,
+                  alignment: Alignment.center,
+                  child: CircularProgressIndicator()),
+            ),
+          if (_controller.searchController.value.text.isNotEmpty &&
+              !_controller.searchtestimonialIsLoading.value)
+            GestureDetector(
+              onTap: () => _controller.searchDataTestimonials(isName: true),
+              child: Expanded(
+                child: Container(
+                  alignment: Alignment.topLeft,
+                  padding: const EdgeInsets.only(top: 30, left: 16, right: 16),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Icon(Icons.search),
+                      Expanded(
+                        child: Text(
+                          !_controller.searchByName.value
+                              ? AppLocalizations.of(context)!.notFound
+                              : AppLocalizations.of(context)!.searchByName +
+                                  " \"${_controller.searchController.value.text}\"",
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                          style: materialTextStyle.textStyleFZ15Blue,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ),
           Expanded(
             child: ListView.builder(
               controller: _controller.scrollController.value,
@@ -47,12 +85,12 @@ class ListTetstimonial {
                           element.name ?? '',
                           style: materialTextStyle.textStyleFZ15,
                         ),
-                        subtitle: Obx(() => Text(
-                              "${element.content}",
-                              maxLines: 1,
-                              overflow: TextOverflow.ellipsis,
-                              style: materialTextStyle.textStyleFZ11,
-                            )),
+                        subtitle: Text(
+                          "${element.content}",
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                          style: materialTextStyle.textStyleFZ11,
+                        ),
                       ),
                     ],
                   ),

@@ -3,7 +3,7 @@ import 'package:muhammad_riski_testimoni/core/error/failure.dart';
 import 'package:muhammad_riski_testimoni/core/helper/service_helper.dart';
 import 'package:http/http.dart' as http;
 
-import '../model/Testimonial_model.dart';
+import '../model/testimonial_model.dart';
 
 class HomeDatasources {
   Future<Either<http.Response, Failure>> getTestimonial(

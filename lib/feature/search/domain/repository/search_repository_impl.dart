@@ -1,10 +1,10 @@
 import 'package:dartz/dartz.dart';
-import 'package:http/src/response.dart';
+import 'package:http/http.dart';
 import 'package:muhammad_riski_testimoni/core/error/failure.dart';
 
-import '../../data/datasources/home_datasources.dart';
-import '../../data/model/Testimonial_model.dart';
-import '../../data/repository/home_repository.dart';
+import '../../data/datasources/search_datasources.dart';
+import '../../data/model/testimonial_model.dart';
+import '../../data/repository/search_repository.dart';
 
 class SearchRepositoryImpl implements SearchRepository {
   SearchDatasources _datasources;
