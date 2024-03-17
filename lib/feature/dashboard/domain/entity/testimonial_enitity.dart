@@ -5,12 +5,14 @@ class TestimonialsEntity {
   String? avatar;
   String? content;
   int? likes;
+  bool? show;
 
   TestimonialsEntity(this.id, this.createdAt, this.name, this.avatar,
       this.content, this.likes);
 
   TestimonialsEntity.fromJson(dynamic json) {
     id = json["id"];
+    show = json["show"];
     createdAt = json["createdAt"];
     name = json["name"];
     avatar = json["avatar"];
@@ -26,6 +28,7 @@ class TestimonialsEntity {
     data["avatar"] = avatar;
     data["content"] = content;
     data["likes"] = likes;
+    data['show'] = show;
     return data;
   }
 }

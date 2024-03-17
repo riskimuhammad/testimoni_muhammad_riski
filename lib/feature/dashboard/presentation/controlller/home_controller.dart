@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'dart:developer';
 
 import 'package:dartz/dartz.dart';
 import 'package:flutter/material.dart';
@@ -21,8 +20,10 @@ class HomeController extends GetxController {
   Rx<TextEditingController> searchController =
       TextEditingController(text: '').obs;
   Rx<LanguagesKey> languagesKey = LanguagesKey().obs;
+  Rx<String> lnCode = ''.obs;
 
   RxList<TestimonialsEntity> listTestimonials = <TestimonialsEntity>[].obs;
+  Rx<bool> expanded = false.obs;
   build(context) async {
     generateSession(context);
     getDataTestimonial(context);
@@ -32,6 +33,7 @@ class HomeController extends GetxController {
     final ln = await SessionHelper.getGessionLanguages();
     if (ln != null) {
       TestimoniApp.setLocale(context, Locale(ln, ''));
+      lnCode.value = ln;
     }
   }
 
@@ -42,6 +44,7 @@ class HomeController extends GetxController {
     either.fold((l) {
       final responseDecode = json.decode(l.body);
       for (var element in responseDecode) {
+        element.addAll({'show': false});
         listTestimonials.add(TestimonialsEntity.fromJson(element));
       }
     }, (r) {
@@ -54,7 +57,13 @@ class HomeController extends GetxController {
     if (ln != null) {
       TestimoniApp.setLocale(context, Locale(ln.languageCode!, ''));
       SessionHelper.setSessionLanguages(ln.languageCode);
+      lnCode.value = ln.languageCode!;
     }
+  }
+
+  lassMoreContent(index) {
+    listTestimonials[index].show = !listTestimonials[index].show!;
+    listTestimonials.refresh();
   }
 //ONTAP ONCHANGE ONLY END
 

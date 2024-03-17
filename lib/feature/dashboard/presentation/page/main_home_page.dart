@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:muhammad_riski_testimoni/feature/dashboard/presentation/controlller/home_controller.dart';
 import 'package:muhammad_riski_testimoni/feature/dashboard/presentation/widget/languages_button.dart';
+import 'package:muhammad_riski_testimoni/feature/dashboard/presentation/widget/list_tetstimonial.dart';
 import 'package:muhammad_riski_testimoni/feature/dashboard/presentation/widget/search_field.dart';
 
 class MainHomePage extends StatelessWidget {
@@ -11,6 +12,7 @@ class MainHomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     final _searchfield = SearchField();
     final _languagesButton = LanguagesButton();
+    final _listTestimonial = ListTetstimonial();
     final _controller = Get.find<HomeController>();
     return GetBuilder<HomeController>(
         init: HomeController(),
@@ -26,11 +28,7 @@ class MainHomePage extends StatelessWidget {
             body: Container(
               height: MediaQuery.of(context).size.height,
               width: MediaQuery.of(context).size.width,
-              child: SingleChildScrollView(
-                child: Column(
-                  children: [],
-                ),
-              ),
+              child: Obx(() => _listTestimonial.list(context)),
             ),
           );
         });

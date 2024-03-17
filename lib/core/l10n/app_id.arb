@@ -1,3 +1,6 @@
 {
-    "allDataIsGenerated":"Semua data berhasil dimuat" 
+    "allDataIsGenerated":"Semua data berhasil dimuat", 
+    "more":"Selanjutnya" ,
+    "createAt":"Dibuat"
+
 }

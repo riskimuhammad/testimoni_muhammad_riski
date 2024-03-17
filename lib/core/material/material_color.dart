@@ -246,4 +246,5 @@ class TestimonialColor {
 
   static Color transparans = Colors.transparent;
   static Color black = Color(0xff101214);
+  static Color white = Color(0xffffffff);
 }

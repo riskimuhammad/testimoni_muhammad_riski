@@ -1,3 +1,5 @@
 {
-    "allDataIsGenerated":"All data have been loaded" 
+    "allDataIsGenerated":"All data have been loaded" ,
+    "more":"More",
+    "createAt":"Create At"
 }
