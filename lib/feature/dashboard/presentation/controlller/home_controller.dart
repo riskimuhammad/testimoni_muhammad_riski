@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:dartz/dartz.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 import 'package:muhammad_riski_testimoni/core/helper/dialog_helper.dart';
 import 'package:muhammad_riski_testimoni/core/helper/languages_key.dart';
 import 'package:muhammad_riski_testimoni/core/helper/session_helper.dart';
@@ -38,6 +39,9 @@ class HomeController extends GetxController {
     if (ln != null) {
       TestimoniApp.setLocale(context, Locale(ln, ''));
       lnCode.value = ln;
+    } else {
+      TestimoniApp.setLocale(context, Locale(Intl.getCurrentLocale(), ''));
+      lnCode.value = Intl.getCurrentLocale();
     }
   }
 
