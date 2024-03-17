@@ -1,6 +1,7 @@
 {
     "allDataIsGenerated":"Semua data berhasil dimuat", 
     "more":"Selanjutnya" ,
-    "createAt":"Dibuat"
+    "createAt":"Dibuat",
+    "hintSearch": "Ingin mencari sesuatu ?"
 
 }

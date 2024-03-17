@@ -23,10 +23,14 @@ class HomeController extends GetxController {
   Rx<String> lnCode = ''.obs;
 
   RxList<TestimonialsEntity> listTestimonials = <TestimonialsEntity>[].obs;
-  Rx<bool> expanded = false.obs;
+  Rx<bool> contentExpanded = false.obs;
+  Rx<bool> testimonialIsEmpty = false.obs;
+  Rx<bool> testimonialIsLoading = false.obs;
+  Rx<int> currentPage = 1.obs;
+  Rx<ScrollController> scrollController = ScrollController().obs;
   build(context) async {
     generateSession(context);
-    getDataTestimonial(context);
+    getDataTestimonial();
   }
 
   generateSession(context) async {
@@ -37,18 +41,31 @@ class HomeController extends GetxController {
     }
   }
 
-  getDataTestimonial(context) async {
-    listTestimonials.clear();
-    final params = TestimonialsModel(limit: 10, page: 1);
+  getDataTestimonial() async {
+    if (currentPage.value > 1) testimonialIsLoading.value = true;
+    List<TestimonialsEntity> listTestimonialsTmp = [];
+    final params = TestimonialsModel(limit: 10, page: currentPage.value);
     final either = await getTestimonial(params);
     either.fold((l) {
       final responseDecode = json.decode(l.body);
       for (var element in responseDecode) {
         element.addAll({'show': false});
-        listTestimonials.add(TestimonialsEntity.fromJson(element));
+        listTestimonialsTmp.add(TestimonialsEntity.fromJson(element));
       }
+      if (listTestimonialsTmp.isEmpty) {
+        testimonialIsEmpty.value = true;
+        currentPage.value -= 1;
+        testimonialIsLoading.value = false;
+      } else {
+        listTestimonials.addAll(listTestimonialsTmp);
+        testimonialIsLoading.value = false;
+      }
+      Future.delayed(Duration(seconds: 2), () {
+        testimonialIsEmpty.value = false;
+      });
     }, (r) {
-      DialogHelper.snackBarHelper(context, message: r.message);
+      DialogHelper.snackBarHelper(Get.context!, message: r.message);
+      testimonialIsLoading.value = false;
     });
   }
 
@@ -65,6 +82,14 @@ class HomeController extends GetxController {
     listTestimonials[index].show = !listTestimonials[index].show!;
     listTestimonials.refresh();
   }
+
+  onScroll() {
+    if (scrollController.value.position.pixels ==
+        scrollController.value.position.maxScrollExtent) {
+      currentPage.value += 1;
+      getDataTestimonial();
+    }
+  }
 //ONTAP ONCHANGE ONLY END
 
 //REPOSITORY IMPL
@@ -76,7 +101,10 @@ class HomeController extends GetxController {
 
   @override
   void onInit() {
+    listTestimonials.clear();
+    currentPage.value = 1;
     _repositoryImpl = HomeRepositoryImpl(_datasources);
+    scrollController.value.addListener(onScroll);
     super.onInit();
   }
 
@@ -87,6 +115,7 @@ class HomeController extends GetxController {
 
   @override
   void onClose() {
+    scrollController.value.dispose();
     super.onClose();
   }
 }

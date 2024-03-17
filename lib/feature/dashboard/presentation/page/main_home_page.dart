@@ -23,7 +23,7 @@ class MainHomePage extends StatelessWidget {
           return Scaffold(
             appBar: AppBar(
               actions: [_languagesButton.languages(context)],
-              flexibleSpace: _searchfield.search(),
+              flexibleSpace: _searchfield.search(context),
             ),
             body: Container(
               height: MediaQuery.of(context).size.height,

@@ -4,6 +4,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:muhammad_riski_testimoni/core/helper/navigator_helper.dart';
 import 'package:muhammad_riski_testimoni/feature/dashboard/presentation/controlller/home_controller.dart';
 import 'package:muhammad_riski_testimoni/feature/dashboard/presentation/page/main_home_page.dart';
+import 'package:muhammad_riski_testimoni/feature/search/presentation/page/main_search_page.dart';
 
 main() {
   runApp(TestimoniApp());
@@ -46,7 +47,7 @@ class _TestimoniAppState extends State<TestimoniApp> {
       initialRoute: routeName.root,
       getPages: [
         GetPage(name: routeName.root, page: () => MainHomePage()),
-        GetPage(name: routeName.search, page: () => MainHomePage()),
+        GetPage(name: routeName.search, page: () => MainSearchPage()),
       ],
     );
   }

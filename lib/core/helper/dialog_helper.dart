@@ -8,7 +8,7 @@ class DialogHelper {
     Flushbar(
       messageText: Text(
         message,
-        style: materialTextStyle.textStyleFZ11,
+        style: materialTextStyle.textStyleFZ11White,
       ),
       icon: Icon(
         Icons.info,

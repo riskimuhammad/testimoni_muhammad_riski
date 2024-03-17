@@ -1,5 +1,6 @@
 {
     "allDataIsGenerated":"All data have been loaded" ,
     "more":"More",
-    "createAt":"Create At"
+    "createAt":"Create At",
+    "hintSearch": "Want to find something?"
 }
